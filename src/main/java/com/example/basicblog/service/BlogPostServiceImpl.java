@@ -20,7 +20,7 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     @Override
     public BlogPost findPostById(Long id) {
-        return repository.getOne(id);
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Post not found."));
     }
 
     @Override
@@ -37,5 +37,12 @@ public class BlogPostServiceImpl implements BlogPostService {
                     p.setRating(post.getRating());
                     return repository.save(p);
                 }).orElseGet(() -> repository.save(post));
+    }
+
+    @Override
+    public BlogPost deletePost(long id) {
+        BlogPost beingDeleted = findPostById(id);
+        repository.delete(beingDeleted);
+        return beingDeleted;
     }
 }

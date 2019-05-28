@@ -10,5 +10,7 @@ public interface BlogPostService {
 
     List<BlogPost> findAllPosts();
 
-    BlogPost save(BlogPost newPost);
+    BlogPost save(BlogPost post);
+
+    BlogPost deletePost(long id);
 }

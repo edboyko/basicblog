@@ -20,7 +20,7 @@ public class BlogPostController {
     }
 
     @GetMapping("/{id}")
-    BlogPost getPostById(long id) {
+    BlogPost getPostById(@PathVariable Long id) {
         return service.findPostById(id);
     }
     @PostMapping
@@ -28,4 +28,8 @@ public class BlogPostController {
         return service.save(newPost);
     }
 
+    @DeleteMapping("/{id}")
+    BlogPost deletePost(@PathVariable Long id) {
+        return service.deletePost(id);
+    }
 }
