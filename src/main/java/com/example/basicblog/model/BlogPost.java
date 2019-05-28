@@ -12,15 +12,15 @@ public class BlogPost {
 
     private String title;
     private String content;
-    private final LocalDateTime createdDate;
-    private int rating;
+    private final LocalDateTime createdDate = LocalDateTime.now();
+    private int rating = 0;
 
     public BlogPost(String title, String content) {
-        this.createdDate = LocalDateTime.now();
-        this.rating = 0;
         this.title = title;
         this.content = content;
     }
+
+    public BlogPost() {}
 
     public long getId() {
         return id;

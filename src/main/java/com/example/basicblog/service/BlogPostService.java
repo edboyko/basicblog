@@ -1,4 +1,4 @@
-package com.example.basicblog.services;
+package com.example.basicblog.service;
 
 import com.example.basicblog.model.BlogPost;
 
@@ -9,4 +9,6 @@ public interface BlogPostService {
     BlogPost findPostById(Long id);
 
     List<BlogPost> findAllPosts();
+
+    BlogPost save(BlogPost newPost);
 }
