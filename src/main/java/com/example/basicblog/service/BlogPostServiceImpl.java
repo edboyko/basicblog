@@ -5,6 +5,7 @@ import com.example.basicblog.repository.BlogPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -35,6 +36,7 @@ public class BlogPostServiceImpl implements BlogPostService {
                     p.setTitle(post.getTitle());
                     p.setContent(post.getContent());
                     p.setRating(post.getRating());
+                    p.setLastEditedDate(LocalDateTime.now());
                     return repository.save(p);
                 }).orElseGet(() -> repository.save(post));
     }

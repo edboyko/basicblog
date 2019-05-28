@@ -13,14 +13,12 @@ public class BlogPost {
     private String title;
     private String content;
     private final LocalDateTime createdDate = LocalDateTime.now();
+    private LocalDateTime lastEditedDate;
     private int rating = 0;
 
-    public BlogPost(String title, String content) {
-        this.title = title;
-        this.content = content;
+    public BlogPost() {
+        this.lastEditedDate = createdDate;
     }
-
-    public BlogPost() {}
 
     public long getId() {
         return id;
@@ -52,5 +50,13 @@ public class BlogPost {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public LocalDateTime getLastEditedDate() {
+        return lastEditedDate;
+    }
+
+    public void setLastEditedDate(LocalDateTime lastEditedDate) {
+        this.lastEditedDate = lastEditedDate;
     }
 }
