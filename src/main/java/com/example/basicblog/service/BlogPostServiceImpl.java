@@ -42,9 +42,7 @@ public class BlogPostServiceImpl implements BlogPostService {
     }
 
     @Override
-    public BlogPost deletePost(long id) {
-        BlogPost beingDeleted = findPostById(id);
-        repository.delete(beingDeleted);
-        return beingDeleted;
+    public void deletePost(long id) {
+        repository.deleteById(id);
     }
 }

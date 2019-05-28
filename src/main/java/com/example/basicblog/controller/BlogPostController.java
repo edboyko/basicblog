@@ -4,12 +4,15 @@ import com.example.basicblog.model.BlogPost;
 import com.example.basicblog.service.BlogPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/posts")
+@RequestMapping(BlogPostController.CONTROLLER_ENDPOINT)
 public class BlogPostController {
+
+    final static String CONTROLLER_ENDPOINT = "/api/v1/posts";
 
     @Autowired
     private BlogPostService service;
@@ -29,7 +32,12 @@ public class BlogPostController {
     }
 
     @DeleteMapping("/{id}")
-    BlogPost deletePost(@PathVariable Long id) {
-        return service.deletePost(id);
+    String deletePost(@PathVariable Long id, final RedirectAttributes redirectAttributes) {
+        service.deletePost(id);
+
+        redirectAttributes.addFlashAttribute("css", "success");
+        redirectAttributes.addFlashAttribute("msg", "Post is deleted!");
+
+        return "redirect:/" + BlogPostController.CONTROLLER_ENDPOINT;
     }
 }
