@@ -13,11 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class BasicblogApplicationTests {
 
-	@Autowired
-	private BlogPostController controller;
-
 	@Test
 	public void contexLoads() throws Exception {
-		assertThat(controller).isNotNull();
+		
 	}
 }
