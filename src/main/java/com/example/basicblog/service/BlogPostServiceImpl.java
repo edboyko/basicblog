@@ -13,7 +13,6 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     private final BlogPostRepository repository;
 
-    @Autowired
     public BlogPostServiceImpl(BlogPostRepository repository) {
         this.repository = repository;
     }
