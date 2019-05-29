@@ -12,5 +12,7 @@ public interface BlogPostService {
 
     BlogPost save(BlogPost post);
 
-    void deletePost(long id);
+    void deletePosts(List<BlogPost> posts);
+
+    void deletePost(Long id);
 }

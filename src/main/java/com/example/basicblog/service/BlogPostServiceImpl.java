@@ -2,7 +2,6 @@ package com.example.basicblog.service;
 
 import com.example.basicblog.model.BlogPost;
 import com.example.basicblog.repository.BlogPostRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -41,7 +40,12 @@ public class BlogPostServiceImpl implements BlogPostService {
     }
 
     @Override
-    public void deletePost(long id) {
+    public void deletePosts(List<BlogPost> posts) {
+        repository.deleteAll(posts);
+    }
+
+    @Override
+    public void deletePost(Long id) {
         repository.deleteById(id);
     }
 }

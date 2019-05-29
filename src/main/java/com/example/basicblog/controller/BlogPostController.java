@@ -35,9 +35,7 @@ public class BlogPostController {
     @ApiOperation(value = "Create new post or update existing if 'id' value have been specified and post with the " +
             "same id has been found.", response = BlogPost.class)
     @PostMapping
-    BlogPost createPost(@RequestBody BlogPost post) {
-        return service.save(post);
-    }
+    BlogPost createPost(@RequestBody BlogPost post) { return service.save(post); }
 
     @ApiOperation(value = "Delete existing post by id.")
     @DeleteMapping("/{id}")
