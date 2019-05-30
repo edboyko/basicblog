@@ -5,9 +5,11 @@ import com.example.basicblog.service.BlogPostService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.management.Query;
 import java.util.List;
 
 @Api(value = "Blog Posts Management System", description = "Contains CRUD methods for Blog Posts.")
@@ -22,8 +24,9 @@ public class BlogPostController {
 
     @ApiOperation(value = "Show all existing posts.", response = List.class)
     @GetMapping
-    List<BlogPost> getAllPosts() {
-        return service.findAllPosts();
+    Page<BlogPost> getPosts(@RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                            @RequestParam(value = "numberOfResults", required = false, defaultValue = "10") Integer numberOfResults) {
+        return service.findPosts(page, numberOfResults);
     }
 
     @ApiOperation(value = "Find post by it's id.", response = BlogPost.class)

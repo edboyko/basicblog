@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Entity
 public class BlogPost {
 
-    private @GeneratedValue @Id long id;
+    @GeneratedValue @Id private long id;
 
     private String title;
     private String content;

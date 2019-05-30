@@ -2,6 +2,8 @@ package com.example.basicblog.service;
 
 import com.example.basicblog.model.BlogPost;
 import com.example.basicblog.repository.BlogPostRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -47,5 +49,10 @@ public class BlogPostServiceImpl implements BlogPostService {
     @Override
     public void deletePost(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public Page<BlogPost> findPosts(Integer page, Integer numberOfResults) {
+        return repository.findAll(PageRequest.of(page, numberOfResults));
     }
 }
