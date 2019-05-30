@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.management.Query;
 import java.util.List;
 
 @Api(value = "Blog Posts Management System", description = "Contains CRUD methods for Blog Posts.")
@@ -22,11 +21,17 @@ public class BlogPostController {
     @Autowired
     private BlogPostService service;
 
-    @ApiOperation(value = "Show all existing posts.", response = List.class)
+    @ApiOperation(value = "Display page with posts. Default page is 0, default number of posts returned per page is " +
+            "10.", response = List.class)
     @GetMapping
     Page<BlogPost> getPosts(@RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
                             @RequestParam(value = "numberOfResults", required = false, defaultValue = "10") Integer numberOfResults) {
         return service.findPosts(page, numberOfResults);
+    }
+    @ApiOperation(value = "Find all posts", response = List.class)
+    @GetMapping("/getAll")
+    List<BlogPost> getPosts() {
+        return service.findAllPosts();
     }
 
     @ApiOperation(value = "Find post by it's id.", response = BlogPost.class)

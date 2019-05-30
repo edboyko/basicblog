@@ -1,27 +1,32 @@
 package com.example.basicblog.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Author {
+@Table(name = "blogreader")
+public class User {
 
     private String name;
 
-    @GeneratedValue @Id private long id;
+    @Id private String id;
 
-    public Author(){}
+    public User(){}
 
     public String getName() {
         return name;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
