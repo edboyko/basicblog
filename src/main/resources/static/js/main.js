@@ -1,4 +1,4 @@
-var blogPostApi = Vue.resource('api/v1/posts/getAll');
+var blogPostApi = Vue.resource('api/v1/posts{/id}');
 Vue.component('blog-post', {
   props: ['post'],
   template: `
@@ -21,7 +21,7 @@ var app = new Vue({
   },
   created: function() {
     blogPostApi.get().then(result =>
-        result.json().then(data => data.forEach(post => this.posts.push(post)))
+        result.json().then(data => data.content.forEach(post => this.posts.push(post)))
         )
   }
 });

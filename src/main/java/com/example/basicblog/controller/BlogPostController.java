@@ -22,16 +22,11 @@ public class BlogPostController {
     private BlogPostService service;
 
     @ApiOperation(value = "Display page with posts. Default page is 0, default number of posts returned per page is " +
-            "10.", response = List.class)
+            "10.", response = Page.class)
     @GetMapping
     Page<BlogPost> getPosts(@RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
                             @RequestParam(value = "numberOfResults", required = false, defaultValue = "10") Integer numberOfResults) {
         return service.findPosts(page, numberOfResults);
-    }
-    @ApiOperation(value = "Find all posts", response = List.class)
-    @GetMapping("/getAll")
-    List<BlogPost> getPosts() {
-        return service.findAllPosts();
     }
 
     @ApiOperation(value = "Find post by it's id.", response = BlogPost.class)
