@@ -1,6 +1,7 @@
 package com.example.basicblog.service;
 
 import com.example.basicblog.model.BlogPost;
+import com.example.basicblog.model.User;
 import com.example.basicblog.repository.BlogPostRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BlogPostServiceImpl implements BlogPostService {
@@ -30,15 +32,23 @@ public class BlogPostServiceImpl implements BlogPostService {
     }
 
     @Override
-    public BlogPost save(BlogPost post) {
-        return repository.findById(post.getId()).map(
-                p -> {
-                    p.setTitle(post.getTitle());
-                    p.setContent(post.getContent());
-                    p.setRating(post.getRating());
-                    p.setLastEditedDate(LocalDateTime.now());
-                    return repository.save(p);
-                }).orElseGet(() -> repository.save(post));
+    public BlogPost save(BlogPost post, User user) {
+
+        Optional<BlogPost> optionalPost = repository.findById(post.getId());
+        BlogPost p;
+        if (optionalPost.isPresent()) {
+            p = optionalPost.get();
+            p.setTitle(post.getTitle());
+            p.setContent(post.getContent());
+            p.setRating(post.getRating());
+            p.setLastEditedDate(LocalDateTime.now());
+        }
+        else {
+            p = post;
+            p.setAuthorId(user.getId());
+        }
+
+        return repository.save(p);
     }
 
     @Override

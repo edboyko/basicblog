@@ -15,6 +15,7 @@ public class BlogPost {
     private final LocalDateTime createdDate = LocalDateTime.now();
     private LocalDateTime lastEditedDate;
     private int rating = 0;
+    private String authorId;
 
     public BlogPost() {
         this.lastEditedDate = createdDate;
@@ -58,5 +59,13 @@ public class BlogPost {
 
     public void setLastEditedDate(LocalDateTime lastEditedDate) {
         this.lastEditedDate = lastEditedDate;
+    }
+
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
+    }
+
+    public String getAuthorId() {
+        return authorId;
     }
 }

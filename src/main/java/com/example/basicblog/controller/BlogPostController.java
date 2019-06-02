@@ -1,11 +1,13 @@
 package com.example.basicblog.controller;
 
 import com.example.basicblog.model.BlogPost;
+import com.example.basicblog.model.User;
 import com.example.basicblog.service.BlogPostService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -38,7 +40,12 @@ public class BlogPostController {
     @ApiOperation(value = "Create new post or update existing if 'id' value have been specified and post with the " +
             "same id has been found.", response = BlogPost.class)
     @PostMapping
-    BlogPost createPost(@RequestBody BlogPost post) { return service.save(post); }
+    BlogPost createPost(@RequestBody BlogPost post, @AuthenticationPrincipal User user) {
+        if (user == null) {
+            throw new RuntimeException("Please authorize to create post.");
+        }
+        return service.save(post, user);
+    }
 
     @ApiOperation(value = "Delete existing post by id.")
     @DeleteMapping("/{id}")
